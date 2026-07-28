@@ -1,0 +1,385 @@
+{
+  "nodes": [
+    {
+      "id": "src_app_admin_dashboard_layout_dashboardlayout",
+      "label": "DashboardLayout",
+      "file_type": "code",
+      "source_file": "src/app/admin/(dashboard)/layout.tsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_admin_dashboard_page_admindashboard",
+      "label": "AdminDashboard",
+      "file_type": "code",
+      "source_file": "src/app/admin/(dashboard)/page.tsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_admin_dashboard_products_id_edit_page_editproductpage",
+      "label": "EditProductPage",
+      "file_type": "code",
+      "source_file": "src/app/admin/(dashboard)/products/[id]/edit/page.tsx",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_admin_dashboard_products_new_page_newproductpage",
+      "label": "NewProductPage",
+      "file_type": "code",
+      "source_file": "src/app/admin/(dashboard)/products/new/page.tsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_admin_login_page_loginpage",
+      "label": "LoginPage",
+      "file_type": "code",
+      "source_file": "src/app/admin/login/page.tsx",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_admin_products_route_get",
+      "label": "GET",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/products/route.ts",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_admin_products_route_post",
+      "label": "POST",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/products/route.ts",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_admin_upload_route_post",
+      "label": "POST",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/upload/route.ts",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_checkout_create_order_route_post",
+      "label": "POST",
+      "file_type": "code",
+      "source_file": "src/app/api/checkout/create-order/route.ts",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_checkout_verify_route_post",
+      "label": "POST",
+      "file_type": "code",
+      "source_file": "src/app/api/checkout/verify/route.ts",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_products_route_get",
+      "label": "GET",
+      "file_type": "code",
+      "source_file": "src/app/api/products/route.ts",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_api_webhooks_razorpay_route_post",
+      "label": "POST",
+      "file_type": "code",
+      "source_file": "src/app/api/webhooks/razorpay/route.ts",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_cart_page_cartpage",
+      "label": "CartPage",
+      "file_type": "code",
+      "source_file": "src/app/cart/page.tsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_error_errorpage",
+      "label": "ErrorPage",
+      "file_type": "code",
+      "source_file": "src/app/error.tsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_not_found_notfound",
+      "label": "NotFound",
+      "file_type": "code",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_order_confirmation_page_orderconfirmationpage",
+      "label": "OrderConfirmationPage",
+      "file_type": "code",
+      "source_file": "src/app/order/confirmation/page.tsx",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_products_slug_page_generatemetadata",
+      "label": "generateMetadata",
+      "file_type": "code",
+      "source_file": "src/app/products/[slug]/page.tsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_app_robots_robots",
+      "label": "robots",
+      "file_type": "code",
+      "source_file": "src/app/robots.ts",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_imageuploader_imageuploader",
+      "label": "ImageUploader",
+      "file_type": "code",
+      "source_file": "src/components/ImageUploader.tsx",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_navbar_navbar",
+      "label": "Navbar",
+      "file_type": "code",
+      "source_file": "src/components/Navbar.tsx",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_productcard_productcard",
+      "label": "ProductCard",
+      "file_type": "code",
+      "source_file": "src/components/ProductCard.tsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_razorpaybutton_razorpaybutton",
+      "label": "RazorpayButton",
+      "file_type": "code",
+      "source_file": "src/components/RazorpayButton.tsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_db_index_db",
+      "label": "Db",
+      "file_type": "code",
+      "source_file": "src/db/index.ts",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_email_getresend",
+      "label": "getResend",
+      "file_type": "code",
+      "source_file": "src/lib/email.ts",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_email_sendorderconfirmation",
+      "label": "sendOrderConfirmation",
+      "file_type": "code",
+      "source_file": "src/lib/email.ts",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_products_getproducts",
+      "label": "getProducts",
+      "file_type": "code",
+      "source_file": "src/lib/products.ts",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_products_getfeaturedproducts",
+      "label": "getFeaturedProducts",
+      "file_type": "code",
+      "source_file": "src/lib/products.ts",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_products_getproductbyslug",
+      "label": "getProductBySlug",
+      "file_type": "code",
+      "source_file": "src/lib/products.ts",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_r2_getuploadurl",
+      "label": "getUploadUrl",
+      "file_type": "code",
+      "source_file": "src/lib/r2.ts",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_r2_publicurl",
+      "label": "publicUrl",
+      "file_type": "code",
+      "source_file": "src/lib/r2.ts",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_razorpay_getrazorpay",
+      "label": "getRazorpay",
+      "file_type": "code",
+      "source_file": "src/lib/razorpay.ts",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_utils_formatprice",
+      "label": "formatPrice",
+      "file_type": "code",
+      "source_file": "src/lib/utils.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_app_api_admin_upload_route",
+      "target": "src_lib_r2_getuploadurl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/upload/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_api_checkout_create_order_route",
+      "target": "src_lib_razorpay_getrazorpay",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/checkout/create-order/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_api_checkout_verify_route",
+      "target": "src_lib_email_sendorderconfirmation",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/checkout/verify/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_layout",
+      "target": "src_components_navbar_navbar",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_page",
+      "target": "src_components_productcard_productcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_page",
+      "target": "src_lib_products_getfeaturedproducts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_products_slug_page",
+      "target": "src_lib_products_getproductbyslug",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/products/[slug]/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_products_slug_page",
+      "target": "src_components_razorpaybutton_razorpaybutton",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/products/[slug]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_products_page",
+      "target": "src_components_productcard_productcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/products/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_app_products_page",
+      "target": "src_lib_products_getproducts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/products/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_adminproductform",
+      "target": "src_components_imageuploader_imageuploader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/AdminProductForm.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
