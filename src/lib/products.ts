@@ -9,7 +9,8 @@ export async function getProducts() {
       with: { images: { orderBy: (i, { asc }) => [asc(i.sortOrder)] } },
       orderBy: [desc(products.createdAt)],
     })
-  } catch {
+  } catch (err) {
+    console.error("error in getProducts:", err)
     return []
   }
 }
@@ -21,7 +22,8 @@ export async function getFeaturedProducts() {
       with: { images: { orderBy: (i, { asc }) => [asc(i.sortOrder)] } },
       orderBy: [desc(products.createdAt)],
     })
-  } catch {
+  } catch (err) {
+    console.error("error in getFeaturedProducts:", err)
     return []
   }
 }

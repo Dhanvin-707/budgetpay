@@ -1,3 +1,6 @@
+import { loadEnvConfig } from "@next/env"
+loadEnvConfig(process.cwd())
+
 import { db } from "./index"
 import { products } from "./schema"
 import { nanoid } from "nanoid"
