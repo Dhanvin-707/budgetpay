@@ -1,7 +1,8 @@
 import { drizzle } from "drizzle-orm/libsql"
 import * as schema from "./schema"
 
-const url = process.env.TURSO_DATABASE_URL || "file:./data/budgetpay.db"
+const url = (process.env.TURSO_DATABASE_URL || "file:./data/budgetpay.db").trim()
+const authToken = (process.env.TURSO_AUTH_TOKEN || "").replace(/\s+/g, "")
 
 let client: any
 
@@ -14,7 +15,7 @@ if (url.startsWith("file:")) {
   const { createClient } = require("@libsql/client/web")
   client = createClient({
     url,
-    authToken: process.env.TURSO_AUTH_TOKEN,
+    authToken,
     // Avoid Next.js global fetch intercept caching errors
     fetch: (input: any, init: any) => {
       return fetch(input, {
