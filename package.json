@@ -15,6 +15,7 @@
     "@aws-sdk/s3-request-presigner": "^3.1095.0",
     "@libsql/client": "^0.17.4",
     "drizzle-orm": "^0.45.2",
+    "leaflet": "^1.9.4",
     "lucide-react": "^1.27.0",
     "nanoid": "^6.0.0",
     "next": "16.2.12",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
