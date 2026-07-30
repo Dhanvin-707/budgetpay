@@ -17,6 +17,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ url })
   } catch (err: any) {
     console.error("Upload error:", err)
-    return NextResponse.json({ error: err.message || "Failed to upload file to R2" }, { status: 500 })
+    return NextResponse.json({
+      error: err.message || "Failed to upload file to R2",
+      name: err.name,
+      code: err.code,
+      stack: err.stack,
+      keys: {
+        hasEndpoint: !!process.env.R2_ENDPOINT,
+        hasKeyId: !!process.env.R2_ACCESS_KEY_ID,
+        hasSecret: !!process.env.R2_SECRET_ACCESS_KEY,
+        hasBucket: !!process.env.R2_BUCKET_NAME,
+        hasPublicUrl: !!process.env.R2_PUBLIC_URL,
+      }
+    }, { status: 500 })
   }
 }
