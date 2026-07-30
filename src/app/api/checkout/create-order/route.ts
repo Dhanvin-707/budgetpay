@@ -53,6 +53,9 @@ export async function POST(req: Request) {
     })
   } catch (err: any) {
     console.error("create-order error:", err)
-    return NextResponse.json({ error: err?.message || String(err) }, { status: 500 })
+    const errMsg = err?.message || String(err)
+    const errCause = err?.cause?.message || err?.cause || ""
+    const fullMsg = errCause ? `${errMsg}\n\nCause: ${errCause}` : errMsg
+    return NextResponse.json({ error: fullMsg }, { status: 500 })
   }
 }
