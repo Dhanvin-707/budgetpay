@@ -1,0 +1,9 @@
+C:\Users\HP\Documents\claude\budgetpay\AGENTS.md
+C:\Users\HP\Documents\claude\budgetpay\CLAUDE.md
+C:\Users\HP\Documents\claude\budgetpay\README.md
+C:\Users\HP\Documents\claude\budgetpay\cookies.txt
+C:\Users\HP\Documents\claude\budgetpay\public\file.svg
+C:\Users\HP\Documents\claude\budgetpay\public\globe.svg
+C:\Users\HP\Documents\claude\budgetpay\public\next.svg
+C:\Users\HP\Documents\claude\budgetpay\public\vercel.svg
+C:\Users\HP\Documents\claude\budgetpay\public\window.svg

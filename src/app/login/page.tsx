@@ -4,6 +4,7 @@ import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import FadeIn from "@/components/FadeIn"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -51,7 +52,8 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-sm flex-col justify-center px-4 py-12">
-      <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-2xl border border-border bg-white p-6 shadow-sm">
+      <FadeIn dir="up">
+        <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-2xl border border-border bg-white p-6 shadow-sm">
         <div>
           <h1 className="text-2xl font-bold text-primary-dark">Sign In</h1>
           <p className="text-xs text-muted mt-1">Access your customer orders or admin panel.</p>
@@ -88,7 +90,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:opacity-50 transition-colors cursor-pointer"
+          className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 cursor-pointer"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
@@ -97,6 +99,7 @@ export default function LoginPage() {
           Customer accounts are created automatically upon completing a checkout purchase.
         </p>
       </form>
+      </FadeIn>
     </div>
   )
 }

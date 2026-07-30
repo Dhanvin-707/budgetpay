@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { getCart, removeFromCart, updateCartQuantity, clearCart, CartItem } from "@/lib/cart"
+import FadeIn from "@/components/FadeIn"
 import dynamic from "next/dynamic"
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), { ssr: false })
@@ -28,7 +29,7 @@ export default function CartView() {
 
   if (!mounted) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-12 text-center text-muted">
+      <div className="mx-auto max-w-4xl px-4 py-12 text-center text-muted animate-pulse-soft">
         Loading cart…
       </div>
     )
@@ -37,11 +38,16 @@ export default function CartView() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-20 text-center">
-        <h2 className="text-2xl font-bold text-primary-dark">Your Cart is Empty</h2>
-        <p className="mt-2 text-muted">Add some quality refurbished pieces to your home.</p>
-        <Link href="/products" className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white hover:bg-primary-dark">
-          Browse Products
-        </Link>
+        <FadeIn dir="up">
+          <h2 className="text-2xl font-bold text-primary-dark">Your Cart is Empty</h2>
+          <p className="mt-2 text-muted">Add some quality refurbished pieces to your home.</p>
+          <Link
+            href="/products"
+            className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-105 active:scale-95"
+          >
+            Browse Products
+          </Link>
+        </FadeIn>
       </div>
     )
   }
@@ -131,94 +137,104 @@ export default function CartView() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-3xl font-bold text-primary-dark">Shopping Cart</h1>
+      <FadeIn dir="up">
+        <h1 className="text-3xl font-bold text-primary-dark">Shopping Cart</h1>
+      </FadeIn>
 
       <div className="mt-8 grid gap-8 md:grid-cols-3">
         {/* Items List */}
         <div className="md:col-span-2 space-y-4">
-          {items.map((item) => (
-            <div key={item.slug} className="flex gap-4 rounded-xl border border-border bg-white p-4 items-center">
-              <div className="h-16 w-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
-                {item.image ? (
-                  <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
-                ) : (
-                  <span className="text-[10px] text-muted opacity-50">No photo</span>
-                )}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-primary-dark">{item.name}</h3>
-                <p className="text-sm text-foreground font-bold mt-0.5">₹{(item.price / 100).toLocaleString("en-IN")}</p>
-              </div>
-              <div className="flex items-center gap-2">
+          {items.map((item, i) => (
+            <FadeIn key={item.slug} dir="up" delay={i * 75}>
+              <div className="flex gap-4 rounded-xl border border-border bg-white p-4 items-center transition-all hover:shadow-md">
+                <div className="h-16 w-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="text-[10px] text-muted opacity-50">No photo</span>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-primary-dark">{item.name}</h3>
+                  <p className="text-sm text-foreground font-bold mt-0.5">₹{(item.price / 100).toLocaleString("en-IN")}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => { updateCartQuantity(item.slug, item.quantity - 1); setItems(getCart()) }}
+                    className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm font-semibold transition-all hover:bg-surface active:scale-95 cursor-pointer"
+                  >
+                    -
+                  </button>
+                  <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => { updateCartQuantity(item.slug, item.quantity + 1); setItems(getCart()) }}
+                    className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm font-semibold transition-all hover:bg-surface active:scale-95 cursor-pointer"
+                  >
+                    +
+                  </button>
+                </div>
                 <button
-                  type="button"
-                  onClick={() => updateCartQuantity(item.slug, item.quantity - 1)}
-                  className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm font-semibold hover:bg-surface active:scale-95"
+                  onClick={() => { removeFromCart(item.slug); setItems(getCart()) }}
+                  className="text-muted transition-all hover:text-red-500 hover:scale-110 text-xs ml-2 cursor-pointer"
                 >
-                  -
-                </button>
-                <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                <button
-                  type="button"
-                  onClick={() => updateCartQuantity(item.slug, item.quantity + 1)}
-                  className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm font-semibold hover:bg-surface active:scale-95"
-                >
-                  +
+                  Remove
                 </button>
               </div>
-              <button
-                onClick={() => removeFromCart(item.slug)}
-                className="text-muted hover:text-red-500 text-xs ml-2 cursor-pointer"
-              >
-                Remove
-              </button>
-            </div>
+            </FadeIn>
           ))}
         </div>
 
         {/* Summary / Form */}
-        <div className="rounded-xl border border-border bg-white p-6 h-fit space-y-6">
-          <div className="space-y-2">
-            <h2 className="text-lg font-bold text-primary-dark">Order Summary</h2>
-            <div className="flex justify-between border-t border-border pt-2 text-sm font-semibold text-foreground">
-              <span>Subtotal</span>
-              <span>₹{(subtotal / 100).toLocaleString("en-IN")}</span>
-            </div>
-          </div>
+        <div className="space-y-6">
+          <FadeIn dir="up" delay={items.length * 75 + 50}>
+            <div className="rounded-xl border border-border bg-white p-6 h-fit space-y-6">
+              <div className="space-y-2">
+                <h2 className="text-lg font-bold text-primary-dark">Order Summary</h2>
+                <div className="flex justify-between border-t border-border pt-2 text-sm font-semibold text-foreground">
+                  <span>Subtotal</span>
+                  <span>₹{(subtotal / 100).toLocaleString("en-IN")}</span>
+                </div>
+              </div>
 
-          {checkoutStep === "cart" && (
-            <button
-              onClick={() => setCheckoutStep("form")}
-              className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
-            >
-              Proceed to Checkout
-            </button>
-          )}
+              {checkoutStep === "cart" && (
+                <button
+                  onClick={() => setCheckoutStep("form")}
+                  className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 cursor-pointer"
+                >
+                  Proceed to Checkout
+                </button>
+              )}
+
+              {checkoutStep === "paying" && (
+                <button disabled className="w-full animate-pulse rounded-lg bg-primary py-3 text-sm font-medium text-white opacity-50 cursor-not-allowed">
+                  Processing Order…
+                </button>
+              )}
+            </div>
+          </FadeIn>
 
           {checkoutStep === "form" && (
-            <form onSubmit={handleCheckout} className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase text-accent tracking-wider">Delivery Details</h3>
-              <input name="name" placeholder="Full Name" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-              <input name="email" type="email" placeholder="Email" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-              <input name="phone" placeholder="Phone" className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-              <LocationPicker name="address" />
-              <button type="submit" className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white hover:bg-primary-dark transition-colors">
-                Pay ₹{(subtotal / 100).toLocaleString("en-IN")}
-              </button>
-              <button
-                type="button"
-                onClick={() => setCheckoutStep("cart")}
-                className="w-full text-center text-xs text-muted hover:underline"
-              >
-                Back to Cart
-              </button>
-            </form>
-          )}
-
-          {checkoutStep === "paying" && (
-            <button disabled className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white opacity-50 cursor-not-allowed">
-              Processing Order…
-            </button>
+            <FadeIn dir="up">
+              <form onSubmit={handleCheckout} className="rounded-xl border border-border bg-white p-6 space-y-3">
+                <h3 className="text-xs font-semibold uppercase text-accent tracking-wider">Delivery Details</h3>
+                <input name="name" placeholder="Full Name" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
+                <input name="email" type="email" placeholder="Email" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
+                <input name="phone" placeholder="Phone" className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
+                <LocationPicker name="address" />
+                <button type="submit" className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 cursor-pointer">
+                  Pay ₹{(subtotal / 100).toLocaleString("en-IN")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCheckoutStep("cart")}
+                  className="w-full text-center text-xs text-muted transition-colors hover:underline"
+                >
+                  Back to Cart
+                </button>
+              </form>
+            </FadeIn>
           )}
         </div>
       </div>
