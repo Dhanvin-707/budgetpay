@@ -4,6 +4,8 @@ import { getFeaturedProducts } from "@/lib/products"
 import FadeIn from "@/components/FadeIn"
 import ProductsGrid from "@/components/ProductsGrid"
 
+export const dynamic = "force-dynamic"
+
 export default async function HomePage() {
   const featured = await getFeaturedProducts()
 

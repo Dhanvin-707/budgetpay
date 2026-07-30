@@ -5,6 +5,8 @@ import { getProducts } from "@/lib/products"
 import FadeIn from "@/components/FadeIn"
 import ProductsGrid from "@/components/ProductsGrid"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   title: "All Products — budgetpay.store",
   description: "Browse our full catalog of refurbished furniture. Chairs, tables, desks, shelving, and more — restored and ready for a new home.",
