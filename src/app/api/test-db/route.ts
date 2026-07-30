@@ -19,12 +19,16 @@ export async function GET() {
       products: all.map(p => ({ id: p.id, name: p.name, featured: p.featured }))
     })
   } catch (err: any) {
+    const cause = err?.cause;
     return NextResponse.json({
       success: false,
       urlExists: !!process.env.TURSO_DATABASE_URL,
       tokenExists: !!process.env.TURSO_AUTH_TOKEN,
       errorName: err?.name,
       errorMessage: err?.message,
+      causeMessage: cause?.message || String(cause),
+      causeCode: cause?.code,
+      causeName: cause?.name,
       errorStack: err?.stack
     }, { status: 500 })
   }
