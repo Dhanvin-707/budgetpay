@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm"
 import { nanoid } from "nanoid"
 
 export async function POST(req: Request) {
-  const { productSlug, customerName, customerEmail, customerPhone, address } = await req.json()
+  const { productSlug, customerName, customerEmail, customerPhone, address, latitude, longitude } = await req.json()
 
   const product = await db.query.products.findFirst({
     where: eq(products.slug, productSlug),
@@ -30,6 +30,8 @@ export async function POST(req: Request) {
     customerEmail: customerEmail || "guest@example.com",
     customerPhone,
     address: address || "",
+    latitude: latitude || null,
+    longitude: longitude || null,
     razorpayOrderId: rzpOrder.id,
     amountPaise: amount,
     status: "pending",

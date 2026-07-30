@@ -2,6 +2,9 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import dynamic from "next/dynamic"
+
+const LocationPicker = dynamic(() => import("@/components/LocationPicker"), { ssr: false })
 
 type Props = {
   productSlug: string
@@ -30,6 +33,8 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
           customerEmail: form.get("email"),
           customerPhone: form.get("phone"),
           address: form.get("address"),
+          latitude: form.get("latitude"),
+          longitude: form.get("longitude"),
         }),
       })
       const { orderId, amount } = await res.json()
@@ -41,6 +46,16 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
         name: "budgetpay.store",
         description: productName,
         order_id: orderId,
+        prefill: {
+          name: form.get("name") || "",
+          email: form.get("email") || "",
+          contact: form.get("phone") || "",
+        },
+        notes: {
+          address: form.get("address") || "",
+          latitude: form.get("latitude") || "",
+          longitude: form.get("longitude") || "",
+        },
         handler: async function (response: any) {
           const verify = await fetch("/api/checkout/verify", {
             method: "POST",
@@ -82,7 +97,7 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
       <input name="name" placeholder="Full Name" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
       <input name="email" type="email" placeholder="Email" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
       <input name="phone" placeholder="Phone" className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-      <textarea name="address" placeholder="Delivery Address" required rows={2} className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+      <LocationPicker name="address" />
       <button type="submit" className="w-full rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark sm:w-auto">
         Pay ₹{(amountPaise / 100).toLocaleString("en-IN")}
       </button>

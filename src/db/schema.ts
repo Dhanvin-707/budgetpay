@@ -39,6 +39,8 @@ export const orders = sqliteTable("orders", {
   customerEmail: text("customer_email").notNull(),
   customerPhone: text("customer_phone"),
   address: text("address").notNull(),
+  latitude: text("latitude"),
+  longitude: text("longitude"),
   razorpayOrderId: text("razorpay_order_id").unique(),
   razorpayPaymentId: text("razorpay_payment_id"),
   amountPaise: integer("amount_paise").notNull(),
