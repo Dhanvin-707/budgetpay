@@ -1,15 +1,22 @@
 import { drizzle } from "drizzle-orm/libsql"
-import { createClient } from "@libsql/client"
 import * as schema from "./schema"
 
 const url = process.env.TURSO_DATABASE_URL || "file:./data/budgetpay.db"
 
-console.log("DB URL is configured:", !!process.env.TURSO_DATABASE_URL, "using local fallback:", !process.env.TURSO_DATABASE_URL)
+let client: any
 
-const client = createClient({
-  url,
-  authToken: process.env.TURSO_AUTH_TOKEN,
-})
+if (url.startsWith("file:")) {
+  // Local SQLite - load native client
+  const { createClient } = require("@libsql/client")
+  client = createClient({ url })
+} else {
+  // Remote Turso - load web client for cloud environments (Vercel)
+  const { createClient } = require("@libsql/client/web")
+  client = createClient({
+    url,
+    authToken: process.env.TURSO_AUTH_TOKEN,
+  })
+}
 
 export const db = drizzle(client, { schema })
 export type Db = typeof db
