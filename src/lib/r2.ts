@@ -22,6 +22,17 @@ export async function getUploadUrl(key: string, contentType: string) {
   return getSignedUrl(s3, cmd, { expiresIn: 3600 })
 }
 
+export async function uploadToR2(key: string, body: Buffer, contentType: string) {
+  const cmd = new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: key,
+    Body: body,
+    ContentType: contentType,
+  })
+  await s3.send(cmd)
+  return `${PUBLIC_URL}/${key}`
+}
+
 export function publicUrl(key: string) {
   return `${PUBLIC_URL}/${key}`
 }

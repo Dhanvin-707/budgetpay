@@ -25,7 +25,7 @@ export default async function HomePage() {
               Browse Products
             </Link>
             <Link
-              href="/products"
+              href="#how-it-works"
               className="rounded-lg border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
             >
               How It Works
@@ -60,6 +60,26 @@ export default async function HomePage() {
               />
             ))
           )}
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how-it-works" className="border-t border-border bg-surface scroll-mt-20">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <h2 className="mb-10 text-center text-2xl font-semibold text-primary-dark">How It Works</h2>
+          <div className="grid gap-8 sm:grid-cols-3">
+            {[
+              { step: "01", title: "Browse & Select", desc: "Explore our collection of handpicked, high-quality furniture pieces. Every item is unique and listed with high-res photos and video walkthroughs." },
+              { step: "02", title: "Simple Payment & Cart", desc: "Add items to your cart and checkout using Razorpay. Pay securely using UPI, Cards, NetBanking, or Wallet." },
+              { step: "03", title: "Final Polish & Delivery", desc: "Our craftspeople give the item a final hand-polish before shipping. It is then carefully packed and delivered straight to your room." },
+            ].map((item) => (
+              <div key={item.step} className="rounded-xl border border-border bg-white p-6 relative">
+                <span className="absolute right-4 top-4 text-3xl font-extrabold text-primary/10">{item.step}</span>
+                <h3 className="text-lg font-semibold text-primary-dark">{item.title}</h3>
+                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { db } from "@/db"
 import { products, productImages, productVideos } from "@/db/schema"
 import { nanoid } from "nanoid"
 import { eq } from "drizzle-orm"
+import { extractYoutubeId } from "@/lib/youtube"
 
 export async function GET() {
   const all = await db.query.products.findMany({
@@ -37,8 +38,9 @@ export async function POST(req: Request) {
     }
   }
 
-  if (youtubeId) {
-    await db.insert(productVideos).values({ id: nanoid(), productId: id, youtubeId, sortOrder: 0 })
+  const videoId = youtubeId ? extractYoutubeId(youtubeId) : null
+  if (videoId) {
+    await db.insert(productVideos).values({ id: nanoid(), productId: id, youtubeId: videoId, sortOrder: 0 })
   }
 
   return NextResponse.json({ id })

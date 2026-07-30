@@ -136,8 +136,8 @@ export default function AdminProductForm() {
       {/* Video */}
       <div>
         <label className="block text-sm font-medium text-foreground">YouTube Video ID</label>
-        <input name="youtubeId" placeholder="e.g. dQw4w9WgXcQ" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-        <p className="mt-1 text-xs text-muted">Upload video to YouTube as unlisted, paste the video ID here.</p>
+        <input name="youtubeId" placeholder="e.g. dQw4w9WgXcQ or full YouTube URL" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+        <p className="mt-1 text-xs text-muted">Paste a YouTube video ID or full URL.</p>
       </div>
 
       <button

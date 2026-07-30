@@ -4,6 +4,7 @@ import { orders } from "@/db/schema"
 import { eq, desc } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import OrderStatusSelect from "@/components/OrderStatusSelect"
 
 async function updateStatus(formData: FormData) {
   "use server"
@@ -59,16 +60,7 @@ export default async function AdminOrdersPage() {
                   </td>
                   <td className="py-3 text-muted">{o.createdAt}</td>
                   <td className="py-3">
-                    <form action={updateStatus}>
-                      <input type="hidden" name="id" value={o.id} />
-                      <select name="status" defaultValue={o.status || "pending"} onChange={e => e.target.form?.requestSubmit()} className="rounded border border-border bg-surface px-2 py-1 text-xs">
-                        <option value="pending">pending</option>
-                        <option value="paid">paid</option>
-                        <option value="shipped">shipped</option>
-                        <option value="delivered">delivered</option>
-                        <option value="cancelled">cancelled</option>
-                      </select>
-                    </form>
+                    <OrderStatusSelect orderId={o.id} currentStatus={o.status || "pending"} updateAction={updateStatus} />
                   </td>
                 </tr>
               ))

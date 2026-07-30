@@ -17,15 +17,20 @@ export default function ImageUploader({ onUpload }: Props) {
       const ext = file.name.split(".").pop()
       const key = `products/${crypto.randomUUID()}.${ext}`
 
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("key", key)
+
       const res = await fetch("/api/admin/upload", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key, contentType: file.type }),
+        body: formData,
       })
-      const { url: uploadUrl } = await res.json()
 
-      await fetch(uploadUrl, { method: "PUT", body: file })
-      const publicUrl = `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/${key}`
+      if (!res.ok) {
+        throw new Error("Upload failed")
+      }
+
+      const { url: publicUrl } = await res.json()
       onUpload(publicUrl)
     } finally {
       setUploading(false)

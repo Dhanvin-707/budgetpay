@@ -6,6 +6,8 @@ import { redirect } from "next/navigation"
 import { nanoid } from "nanoid"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { extractYoutubeId } from "@/lib/youtube"
+import ClientImageInput from "@/components/ClientImageInput"
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -37,9 +39,10 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     if (imageUrl) {
       await db.insert(productImages).values({ id: nanoid(), productId: id, url: imageUrl, sortOrder: 99 })
     }
-    if (youtubeId) {
+    const videoId = youtubeId ? extractYoutubeId(youtubeId) : null
+    if (videoId) {
       await db.delete(productVideos).where(eq(productVideos.productId, id))
-      await db.insert(productVideos).values({ id: nanoid(), productId: id, youtubeId, sortOrder: 0 })
+      await db.insert(productVideos).values({ id: nanoid(), productId: id, youtubeId: videoId, sortOrder: 0 })
     }
 
     revalidatePath("/admin/products")
@@ -57,6 +60,26 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     <div className="mx-auto max-w-3xl px-4 py-12">
       <Link href="/admin/products" className="text-sm text-muted hover:text-primary">&larr; Back</Link>
       <h1 className="mt-4 text-3xl font-bold text-primary-dark">Edit: {product.name}</h1>
+
+      {/* Existing images */}
+      {product.images.length > 0 && (
+        <div className="mt-6 border-b border-border pb-6">
+          <label className="block text-sm font-medium">Current Images</label>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {product.images.map((img) => (
+              <div key={img.id} className="relative">
+                <img src={img.url} alt="" className="h-20 w-20 rounded-lg object-cover" />
+                <form action={deleteImage}>
+                  <input type="hidden" name="imageId" value={img.id} />
+                  <button type="submit" className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                    &times;
+                  </button>
+                </form>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <form action={updateProduct} className="mt-8 space-y-6">
         <div className="grid gap-4 sm:grid-cols-2">
@@ -113,30 +136,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           <label htmlFor="featured" className="text-sm font-medium">Featured</label>
         </div>
 
-        {/* Existing images */}
-        {product.images.length > 0 && (
-          <div>
-            <label className="block text-sm font-medium">Current Images</label>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {product.images.map((img) => (
-                <div key={img.id} className="relative">
-                  <img src={img.url} alt="" className="h-20 w-20 rounded-lg object-cover" />
-                  <form action={deleteImage}>
-                    <input type="hidden" name="imageId" value={img.id} />
-                    <button type="submit" className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                      &times;
-                    </button>
-                  </form>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div>
-          <label className="block text-sm font-medium">Add Image URL</label>
-          <input name="imageUrl" placeholder="https://pub-xxxx.r2.dev/products/abc.jpg" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm" />
-        </div>
+        <ClientImageInput />
 
         <div>
           <label className="block text-sm font-medium">YouTube Video ID</label>
