@@ -1,17 +1,22 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
+// Strip newlines/whitespace from keys pasted into Vercel
+const endpoint = (process.env.R2_ENDPOINT || "").trim().replace(/\s+/g, "")
+const accessKeyId = (process.env.R2_ACCESS_KEY_ID || "").trim().replace(/\s+/g, "")
+const secretAccessKey = (process.env.R2_SECRET_ACCESS_KEY || "").trim().replace(/\s+/g, "")
+
 const s3 = new S3Client({
   region: "auto",
-  endpoint: process.env.R2_ENDPOINT!,
+  endpoint: endpoint || undefined,
   credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
+    accessKeyId,
+    secretAccessKey,
   },
 })
 
-export const BUCKET = process.env.R2_BUCKET_NAME!
-export const PUBLIC_URL = process.env.R2_PUBLIC_URL!
+export const BUCKET = (process.env.R2_BUCKET_NAME || "").trim().replace(/\s+/g, "")
+export const PUBLIC_URL = (process.env.R2_PUBLIC_URL || "").trim().replace(/\s+/g, "")
 
 export async function getUploadUrl(key: string, contentType: string) {
   const cmd = new PutObjectCommand({
