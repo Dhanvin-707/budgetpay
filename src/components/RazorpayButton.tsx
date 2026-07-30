@@ -37,6 +37,12 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
           longitude: form.get("longitude"),
         }),
       })
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}))
+        throw new Error(errData.error || `HTTP error! Status: ${res.status}`)
+      }
+
       const { orderId, amount } = await res.json()
 
       const rzp = new (window as any).Razorpay({
@@ -76,8 +82,8 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
         modal: { ondismiss: () => setLoading(false) },
       })
       rzp.open()
-    } catch {
-      alert("Something went wrong. Please try again.")
+    } catch (err: any) {
+      alert(err?.message || "Something went wrong. Please try again.")
       setStep("form")
     } finally {
       setLoading(false)

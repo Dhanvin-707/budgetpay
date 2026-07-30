@@ -77,3 +77,11 @@ export const ordersRelations = relations(orders, ({ many }) => ({
 export const orderItemsRelations = relations(orderItems, ({ one }) => ({
   order: one(orders, { fields: [orderItems.orderId], references: [orders.id] }),
 }))
+
+export const users = sqliteTable("users", {
+  id: text("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash"),
+  name: text("name"),
+  createdAt: text("created_at").default("datetime('now')"),
+})
