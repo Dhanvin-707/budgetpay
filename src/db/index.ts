@@ -15,6 +15,13 @@ if (url.startsWith("file:")) {
   client = createClient({
     url,
     authToken: process.env.TURSO_AUTH_TOKEN,
+    // Avoid Next.js global fetch intercept caching errors
+    fetch: (input: any, init: any) => {
+      return fetch(input, {
+        ...init,
+        cache: "no-store",
+      })
+    }
   })
 }
 
