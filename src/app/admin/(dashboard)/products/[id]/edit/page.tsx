@@ -28,12 +28,13 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     const condition = formData.get("condition") as string
     const stock = Number(formData.get("stock"))
     const featured = formData.get("featured") === "on"
+    const refurbished = formData.get("refurbished") === "on"
     const imageUrl = formData.get("imageUrl") as string
     const youtubeId = formData.get("youtubeId") as string
 
     await db.update(products).set({
       name, slug, description, pricePaise, originalPricePaise,
-      category, condition, stock, featured, updatedAt: "datetime('now')",
+      category, condition, stock, featured, refurbished, updatedAt: "datetime('now')",
     }).where(eq(products.id, id))
 
     if (imageUrl) {
@@ -134,6 +135,11 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
         <div className="flex items-center gap-2">
           <input name="featured" type="checkbox" id="featured" defaultChecked={!!product.featured} className="rounded border-border" />
           <label htmlFor="featured" className="text-sm font-medium">Featured</label>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input name="refurbished" type="checkbox" id="refurbished" defaultChecked={!!product.refurbished} className="rounded border-border" />
+          <label htmlFor="refurbished" className="text-sm font-medium">Refurbished</label>
         </div>
 
         <ClientImageInput />

@@ -3,6 +3,7 @@ import ProductCard from "@/components/ProductCard"
 import { getFeaturedProducts } from "@/lib/products"
 import FadeIn from "@/components/FadeIn"
 import ProductsGrid from "@/components/ProductsGrid"
+import Hero from "@/components/Hero"
 
 export const dynamic = "force-dynamic"
 
@@ -12,37 +13,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-b from-primary/5 to-background">
-        <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:py-32">
-          <FadeIn dir="none" delay={100}>
-            <h1 className="text-4xl font-bold tracking-tight text-primary-dark sm:text-5xl lg:text-6xl">
-              Beautiful Furniture,{" "}
-              <span className="text-primary">Refurbished</span>
-            </h1>
-          </FadeIn>
-          <FadeIn dir="up" delay={300}>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
-              Quality pre-loved furniture restored to its former glory. Sustainable choices that don&apos;t compromise on style — at prices that make sense.
-            </p>
-          </FadeIn>
-          <FadeIn dir="up" delay={500}>
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <Link
-                href="/products"
-                className="rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-105 active:scale-95"
-              >
-                Browse Products
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="rounded-lg border border-border px-6 py-3 text-sm font-medium text-foreground transition-all hover:bg-surface hover:scale-105 active:scale-95"
-              >
-                How It Works
-              </Link>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <Hero />
 
       {/* Featured */}
       <FadeIn dir="up" delay={200}>
@@ -67,6 +38,7 @@ export default async function HomePage() {
                     price: p.pricePaise,
                     category: p.category || "",
                     image: p.images?.[0]?.url || "",
+                    refurbished: p.refurbished ?? false,
                   }}
                 />
               ))
@@ -85,7 +57,7 @@ export default async function HomePage() {
             {[
               { step: "01", title: "Browse & Select", desc: "Explore our collection of handpicked, high-quality furniture pieces. Every item is unique and listed with high-res photos and video walkthroughs." },
               { step: "02", title: "Simple Payment & Cart", desc: "Add items to your cart and checkout using Razorpay. Pay securely using UPI, Cards, NetBanking, or Wallet." },
-              { step: "03", title: "Final Polish & Delivery", desc: "Our craftspeople give the item a final hand-polish before shipping. It is then carefully packed and delivered straight to your room." },
+              { step: "03", title: "Final Check & Delivery", desc: "Every piece gets a final check and polish before shipping. It is then carefully packed and delivered straight to your room." },
             ].map((item, i) => (
               <FadeIn key={item.step} dir="up" delay={i * 150}>
                 <div className="group rounded-xl border border-border bg-white p-6 relative transition-all hover:-translate-y-1 hover:shadow-lg">
@@ -107,8 +79,8 @@ export default async function HomePage() {
           </FadeIn>
           <div className="grid gap-8 sm:grid-cols-3">
             {[
-              { title: "Restored with Care", desc: "Every piece inspected, cleaned, and restored by hand. Good for your home, good for the planet." },
-              { title: "Fair Prices", desc: "No middlemen. We buy smart, restore efficiently, and pass the savings to you." },
+              { title: "Quality-Checked", desc: "Every piece inspected and finished by hand — some are refurbished finds, all are ready to use." },
+              { title: "Fair Prices", desc: "No middlemen. We buy smart and pass the savings to you." },
               { title: "Delivered Safely", desc: "Careful packing and reliable delivery so your furniture arrives looking its best." },
             ].map((item, i) => (
               <FadeIn key={item.title} dir="up" delay={i * 150}>

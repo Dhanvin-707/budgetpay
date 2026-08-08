@@ -43,6 +43,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="text-xs font-medium uppercase tracking-wider text-accent">
               {product.category}
               {product.condition && <span className="ml-2 text-muted">· {product.condition}</span>}
+              {product.refurbished && (
+                <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                  Refurbished
+                </span>
+              )}
             </p>
             <h1 className="mt-1 text-3xl font-bold text-primary-dark">{product.name}</h1>
 
@@ -58,6 +63,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
 
             <p className="mt-4 leading-relaxed text-muted">{product.description}</p>
+
+            {product.refurbished && (
+              <p className="mt-3 rounded-lg bg-accent/10 px-3 py-2 text-xs text-accent">
+                This piece is refurbished — cleaned, repaired, and restored for a new life at a lower price.
+              </p>
+            )}
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-start">
               <AddToCartButton

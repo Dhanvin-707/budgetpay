@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import FadeIn from "@/components/FadeIn"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -67,33 +69,33 @@ export default function LoginPage() {
 
         <div>
           <label className="block text-xs font-semibold text-muted">Email Address</label>
-          <input
+          <Input
             name="email"
             type="email"
             placeholder="you@example.com"
             required
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none"
+            className="mt-1"
           />
         </div>
 
         <div>
           <label className="block text-xs font-semibold text-muted">Password</label>
-          <input
+          <Input
             name="password"
             type="password"
             placeholder="••••••••"
             required
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none"
+            className="mt-1"
           />
         </div>
 
-        <button
+        <Button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 cursor-pointer"
+          className="w-full py-2.5"
         >
           {loading ? "Signing in..." : "Sign In"}
-        </button>
+        </Button>
 
         <p className="text-center text-[11px] text-muted leading-relaxed">
           Customer accounts are created automatically upon completing a checkout purchase.

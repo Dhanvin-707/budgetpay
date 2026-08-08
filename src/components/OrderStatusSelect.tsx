@@ -1,25 +1,40 @@
 "use client"
 
+import { useRef } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 export default function OrderStatusSelect({ orderId, currentStatus, updateAction }: {
   orderId: string
   currentStatus: string
   updateAction: (formData: FormData) => Promise<void>
 }) {
+  const formRef = useRef<HTMLFormElement>(null)
+
   return (
-    <form action={updateAction}>
+    <form ref={formRef} action={updateAction}>
       <input type="hidden" name="id" value={orderId} />
-      <select
+      <Select
         name="status"
         defaultValue={currentStatus}
-        onChange={e => e.target.form?.requestSubmit()}
-        className="rounded border border-border bg-surface px-2 py-1 text-xs"
+        onValueChange={() => formRef.current?.requestSubmit()}
       >
-        <option value="pending">pending</option>
-        <option value="paid">paid</option>
-        <option value="shipped">shipped</option>
-        <option value="delivered">delivered</option>
-        <option value="cancelled">cancelled</option>
-      </select>
+        <SelectTrigger className="w-[110px]">
+          <SelectValue placeholder="Status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="pending">pending</SelectItem>
+          <SelectItem value="paid">paid</SelectItem>
+          <SelectItem value="shipped">shipped</SelectItem>
+          <SelectItem value="delivered">delivered</SelectItem>
+          <SelectItem value="cancelled">cancelled</SelectItem>
+        </SelectContent>
+      </Select>
     </form>
   )
 }

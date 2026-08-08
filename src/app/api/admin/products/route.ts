@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const body = await req.json()
-  const { name, slug, description, pricePaise, originalPricePaise, category, condition, stock, featured, images, youtubeId } = body
+  const { name, slug, description, pricePaise, originalPricePaise, category, condition, stock, featured, refurbished, images, youtubeId } = body
 
   const id = nanoid()
   await db.insert(products).values({
@@ -29,6 +29,7 @@ export async function POST(req: Request) {
     condition,
     stock: stock ?? 1,
     featured: featured ?? false,
+    refurbished: refurbished ?? false,
     published: true,
   })
 

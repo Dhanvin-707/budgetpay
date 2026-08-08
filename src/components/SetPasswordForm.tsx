@@ -4,6 +4,8 @@ import { useState } from "react"
 import { setPasswordAction } from "@/app/order/confirmation/actions"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 type Props = {
   email: string
@@ -84,33 +86,33 @@ export default function SetPasswordForm({ email, orderId }: Props) {
         {error && <p className="text-xs font-medium text-red-600 bg-red-50 p-2 rounded">{error}</p>}
         <div>
           <label className="block text-xs font-semibold text-muted">Password</label>
-          <input
+          <Input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Min 6 characters"
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none"
+            className="mt-1"
           />
         </div>
         <div>
           <label className="block text-xs font-semibold text-muted">Confirm Password</label>
-          <input
+          <Input
             type="password"
             required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Repeat password"
-            className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none"
+            className="mt-1"
           />
         </div>
-        <button
+        <Button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:opacity-50 transition-colors cursor-pointer"
+          className="w-full h-10 py-2"
         >
           {loading ? "Saving..." : "Create Account & Log In"}
-        </button>
+        </Button>
       </form>
     </div>
   )

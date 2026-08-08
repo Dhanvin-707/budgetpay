@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "All Products — budgetpay.store",
-  description: "Browse our full catalog of refurbished furniture. Chairs, tables, desks, shelving, and more — restored and ready for a new home.",
+  description: "Browse our full catalog of affordable furniture. Chairs, tables, desks, shelving, and more — quality pieces at prices that make sense.",
 }
 
 export default async function ProductsPage() {
@@ -21,7 +21,7 @@ export default async function ProductsPage() {
     <div className="mx-auto max-w-6xl px-4 py-12">
       <FadeIn dir="up">
         <h1 className="text-3xl font-bold text-primary-dark">All Products</h1>
-        <p className="mt-2 text-muted">Refurbished furniture, ready for a new home.</p>
+        <p className="mt-2 text-muted">Quality furniture, affordable prices.</p>
       </FadeIn>
 
       {categories.length > 0 && (
@@ -54,6 +54,7 @@ export default async function ProductsPage() {
                 price: p.pricePaise,
                 category: p.category || "",
                 image: p.images?.[0]?.url || "",
+                refurbished: p.refurbished ?? false,
               }}
             />
           ))

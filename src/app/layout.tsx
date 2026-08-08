@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, MuseoModerno } from "next/font/google"
 import Link from "next/link"
 import Navbar from "@/components/Navbar"
+import Logo from "@/components/Logo"
 import Script from "next/script"
 import AuthProvider from "@/components/AuthProvider"
 import "./globals.css"
@@ -11,14 +12,20 @@ const geistSans = Geist({
   subsets: ["latin"],
 })
 
+const museo = MuseoModerno({
+  variable: "--font-museo",
+  subsets: ["latin"],
+  weight: ["500", "700"],
+})
+
 export const metadata: Metadata = {
-  title: "budgetpay.store — Refurbished Furniture",
-  description: "Quality refurbished furniture at budget-friendly prices. Sustainable, affordable, stylish.",
+  title: "budgetpay.store — Affordable Furniture",
+  description: "Quality furniture without the premium markup. Affordable styles, budget-friendly prices.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${museo.variable} ${geistSans.variable} h-full antialiased`}>
       <head>
         <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       </head>
@@ -29,8 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AuthProvider>
         <footer className="border-t border-border bg-white">
           <div className="mx-auto max-w-6xl px-4 py-8 text-center text-sm text-muted">
-            <p className="font-medium text-primary-dark">budgetpay.store</p>
-            <p className="mt-1">Refurbished furniture. Sustainable living. Smart prices.</p>
+            <p className="flex items-center justify-center gap-2">
+              <Logo className="h-7 w-auto" />
+              <span className="font-semibold text-primary-dark [font-family:var(--font-museo)]">budgetPay</span>
+            </p>
+            <p className="mt-1">Affordable furniture. Honest prices.</p>
             <div className="mt-3 flex items-center justify-center gap-4 text-xs">
               <Link href="/privacy" className="text-muted hover:text-primary-dark transition-colors">Privacy Policy</Link>
               <span className="text-border">|</span>

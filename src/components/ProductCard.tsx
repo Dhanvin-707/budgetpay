@@ -7,6 +7,7 @@ type Product = {
   price: number
   category: string
   image: string
+  refurbished?: boolean
 }
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -15,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
       href={`/products/${product.slug}`}
       className="group block rounded-xl border border-border bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
-      <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center text-muted text-sm">
+      <div className="relative mb-3 aspect-[4/3] w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center text-muted text-sm">
         {product.image ? (
           <img
             src={product.image}
@@ -25,6 +26,11 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         ) : (
           <span className="opacity-50">Photo coming soon</span>
+        )}
+        {product.refurbished && (
+          <span className="absolute left-2 top-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+            Refurbished
+          </span>
         )}
       </div>
       <p className="text-xs font-medium uppercase tracking-wider text-accent">{product.category}</p>

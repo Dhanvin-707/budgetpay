@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 import { getCart, removeFromCart, updateCartQuantity, clearCart, CartItem } from "@/lib/cart"
 import FadeIn from "@/components/FadeIn"
 import dynamic from "next/dynamic"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), { ssr: false })
 
@@ -40,7 +42,7 @@ export default function CartView() {
       <div className="mx-auto max-w-4xl px-4 py-20 text-center">
         <FadeIn dir="up">
           <h2 className="text-2xl font-bold text-primary-dark">Your Cart is Empty</h2>
-          <p className="mt-2 text-muted">Add some quality refurbished pieces to your home.</p>
+          <p className="mt-2 text-muted">Add some quality affordable pieces to your home.</p>
           <Link
             href="/products"
             className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-105 active:scale-95"
@@ -199,18 +201,18 @@ export default function CartView() {
               </div>
 
               {checkoutStep === "cart" && (
-                <button
+                <Button
                   onClick={() => setCheckoutStep("form")}
-                  className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 cursor-pointer"
+                  className="w-full"
                 >
                   Proceed to Checkout
-                </button>
+                </Button>
               )}
 
               {checkoutStep === "paying" && (
-                <button disabled className="w-full animate-pulse rounded-lg bg-primary py-3 text-sm font-medium text-white opacity-50 cursor-not-allowed">
+                <Button disabled className="w-full animate-pulse opacity-50 cursor-not-allowed">
                   Processing Order…
-                </button>
+                </Button>
               )}
             </div>
           </FadeIn>
@@ -219,20 +221,21 @@ export default function CartView() {
             <FadeIn dir="up">
               <form onSubmit={handleCheckout} className="rounded-xl border border-border bg-white p-6 space-y-3">
                 <h3 className="text-xs font-semibold uppercase text-accent tracking-wider">Delivery Details</h3>
-                <input name="name" placeholder="Full Name" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
-                <input name="email" type="email" placeholder="Email" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
-                <input name="phone" placeholder="Phone" className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors focus:border-primary focus:outline-none" />
+                <Input name="name" placeholder="Full Name" required />
+                <Input name="email" type="email" placeholder="Email" required />
+                <Input name="phone" placeholder="Phone" />
                 <LocationPicker name="address" />
-                <button type="submit" className="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-95 cursor-pointer">
+                <Button type="submit" className="w-full">
                   Pay ₹{(subtotal / 100).toLocaleString("en-IN")}
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
+                  variant="ghost"
                   onClick={() => setCheckoutStep("cart")}
-                  className="w-full text-center text-xs text-muted transition-colors hover:underline"
+                  className="w-full text-xs text-muted hover:underline active:scale-100"
                 >
                   Back to Cart
-                </button>
+                </Button>
               </form>
             </FadeIn>
           )}

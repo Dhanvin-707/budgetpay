@@ -3,6 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import ImageUploader from "./ImageUploader"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function AdminProductForm() {
   const router = useRouter()
@@ -24,6 +27,7 @@ export default function AdminProductForm() {
       condition: form.get("condition"),
       stock: Number(form.get("stock")),
       featured: form.get("featured") === "on",
+      refurbished: form.get("refurbished") === "on",
       images,
       youtubeId: form.get("youtubeId"),
     }
@@ -52,34 +56,34 @@ export default function AdminProductForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="block text-sm font-medium text-foreground">Name</label>
-          <input name="name" required className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+          <Input name="name" required className="mt-1" />
         </div>
         <div>
           <label className="block text-sm font-medium text-foreground">Slug (URL)</label>
-          <input name="slug" required className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+          <Input name="slug" required className="mt-1" />
         </div>
       </div>
 
       <div>
         <label className="block text-sm font-medium text-foreground">Description</label>
-        <textarea name="description" rows={4} className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+        <Textarea name="description" rows={4} className="mt-1" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="block text-sm font-medium text-foreground">Price (in paise, ₹500 = 50000)</label>
-          <input name="pricePaise" type="number" required className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+          <Input name="pricePaise" type="number" required className="mt-1" />
         </div>
         <div>
           <label className="block text-sm font-medium text-foreground">Original Price (optional)</label>
-          <input name="originalPricePaise" type="number" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+          <Input name="originalPricePaise" type="number" className="mt-1" />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
           <label className="block text-sm font-medium text-foreground">Category</label>
-          <select name="category" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none">
+          <select name="category" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm focus:border-primary focus:outline-none">
             <option value="">Select</option>
             <option>Chairs</option>
             <option>Tables</option>
@@ -91,7 +95,7 @@ export default function AdminProductForm() {
         </div>
         <div>
           <label className="block text-sm font-medium text-foreground">Condition</label>
-          <select name="condition" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none">
+          <select name="condition" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm focus:border-primary focus:outline-none">
             <option value="">Select</option>
             <option>excellent</option>
             <option>good</option>
@@ -100,13 +104,20 @@ export default function AdminProductForm() {
         </div>
         <div>
           <label className="block text-sm font-medium text-foreground">Stock</label>
-          <input name="stock" type="number" defaultValue={1} className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+          <Input name="stock" type="number" defaultValue={1} className="mt-1" />
         </div>
       </div>
 
       <div className="flex items-center gap-2">
         <input name="featured" type="checkbox" id="featured" className="rounded border-border" />
         <label htmlFor="featured" className="text-sm font-medium">Featured product</label>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <input name="refurbished" type="checkbox" id="refurbished" className="rounded border-border" />
+        <label htmlFor="refurbished" className="text-sm font-medium">
+          Refurbished — show the <span className="font-semibold text-accent">Refurbished</span> tag
+        </label>
       </div>
 
       {/* Images */}
@@ -136,17 +147,17 @@ export default function AdminProductForm() {
       {/* Video */}
       <div>
         <label className="block text-sm font-medium text-foreground">YouTube Video ID</label>
-        <input name="youtubeId" placeholder="e.g. dQw4w9WgXcQ or full YouTube URL" className="mt-1 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+        <Input name="youtubeId" placeholder="e.g. dQw4w9WgXcQ or full YouTube URL" className="mt-1" />
         <p className="mt-1 text-xs text-muted">Paste a YouTube video ID or full URL.</p>
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark disabled:opacity-50"
+        className="h-11 px-8 py-3"
       >
         {loading ? "Saving…" : "Save Product"}
-      </button>
+      </Button>
     </form>
   )
 }

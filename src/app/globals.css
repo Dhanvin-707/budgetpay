@@ -2,12 +2,12 @@
 
 @theme inline {
   --color-background: #fdf8f3;
-  --color-foreground: #1a1a1a;
+  --color-foreground: #332626;
   --color-primary: #8b5e3c;
-  --color-primary-dark: #5c3a21;
+  --color-primary-dark: #332626;
   --color-primary-light: #b8835a;
-  --color-accent: #2d6a4f;
-  --color-accent-light: #40916c;
+  --color-accent: #8b5e3c;
+  --color-accent-light: #b8835a;
   --color-muted: #6b5a4e;
   --color-border: #e8ddd0;
   --color-surface: #ffffff;

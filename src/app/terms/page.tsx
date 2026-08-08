@@ -12,7 +12,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="mb-2 text-lg font-semibold text-primary-dark">2. Products &amp; Descriptions</h2>
-          <p>All furniture is refurbished — pre-owned items that have been cleaned, repaired, and restored. Each piece is unique; minor variations in colour, grain, and finish are natural and expected. Photos are taken under controlled lighting and may differ slightly from the actual item.</p>
+          <p>Some items in our catalog are refurbished — cleaned, repaired, and restored pre-owned pieces, clearly marked with our "Refurbished" tag. Other items are new. Each piece is unique; minor variations in colour, grain, and finish are natural and expected. Photos are taken under controlled lighting and may differ slightly from the actual item.</p>
         </section>
 
         <section>

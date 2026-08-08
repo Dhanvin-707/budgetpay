@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import dynamic from "next/dynamic"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), { ssr: false })
 
@@ -92,21 +94,21 @@ export default function RazorpayButton({ productSlug, productName, amountPaise }
 
   if (step === "paying") {
     return (
-      <button disabled className="w-full rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white opacity-50 sm:w-auto">
+      <Button disabled className="w-full sm:w-auto">
         Processing…
-      </button>
+      </Button>
     )
   }
 
   return (
     <form onSubmit={handlePay} className="space-y-3">
-      <input name="name" placeholder="Full Name" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-      <input name="email" type="email" placeholder="Email" required className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
-      <input name="phone" placeholder="Phone" className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-primary focus:outline-none" />
+      <Input name="name" placeholder="Full Name" required />
+      <Input name="email" type="email" placeholder="Email" required />
+      <Input name="phone" placeholder="Phone" />
       <LocationPicker name="address" />
-      <button type="submit" className="w-full rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark sm:w-auto">
+      <Button type="submit" className="w-full sm:w-auto">
         Pay ₹{(amountPaise / 100).toLocaleString("en-IN")}
-      </button>
+      </Button>
     </form>
   )
 }

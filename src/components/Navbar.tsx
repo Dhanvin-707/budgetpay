@@ -5,6 +5,7 @@ import { ShoppingCart, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { getCart } from "@/lib/cart"
 import { useSession, signOut } from "next-auth/react"
+import Logo from "@/components/Logo"
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -30,8 +31,11 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold tracking-tight text-primary-dark transition-opacity hover:opacity-80">
-          budgetpay<span className="text-primary">.store</span>
+        <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+          <Logo className="h-8 w-auto" />
+          <span className="text-xl font-bold tracking-tight text-primary-dark [font-family:var(--font-museo)]">
+            budgetPay
+          </span>
         </Link>
 
         <div className="hidden items-center gap-6 sm:flex">

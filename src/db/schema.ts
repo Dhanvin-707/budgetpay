@@ -12,6 +12,7 @@ export const products = sqliteTable("products", {
   condition: text("condition"), // excellent, good, fair
   stock: integer("stock").default(1),
   featured: integer("featured", { mode: "boolean" }).default(false),
+  refurbished: integer("refurbished", { mode: "boolean" }).default(false),
   published: integer("published", { mode: "boolean" }).default(false),
   createdAt: text("created_at").default("datetime('now')"),
   updatedAt: text("updated_at").default("datetime('now')"),
